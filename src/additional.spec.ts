@@ -16,4 +16,18 @@ describe('addStudent', () => {
       grades: [],
     });
   });
+  it('should not allow negative ids', () => {
+    const id1 = db.addStudent('blair');
+    expect(id1).toBeGreaterThanOrEqual(1);
+  });
+});
+
+describe('nameToIDs', () => {
+  it('should only return ids associated with the name of the student', () => {
+    const id1 = db.addStudent('blair');
+    const id2 = db.addStudent('blair');
+    db.addStudent('tom');
+
+    expect(db.nameToIDs('blair')).toStrictEqual([id1, id2]);
+  });
 });

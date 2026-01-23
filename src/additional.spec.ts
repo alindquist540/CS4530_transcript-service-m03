@@ -30,4 +30,19 @@ describe('nameToIDs', () => {
 
     expect(db.nameToIDs('blair')).toStrictEqual([id1, id2]);
   });
+  it('should not return the entire ids list for all students when some have different name', () => {
+    const id1 = db.addStudent('Alex');
+    const id2 = db.addStudent('Alex');
+    const id3 = db.addStudent('Horne');
+    const id4 = db.addStudent('David');
+    expect(db.getAllStudentIDs()).toStrictEqual([id1, id2, id3, id4]);
+
+    expect(db.nameToIDs('Alex')).not.toStrictEqual([id1, id2, id3, id4]);
+  });
 });
+
+/**
+ * The stryker mutation on line 70 is innocuous since it still correctly throw an error, the error
+ * message is just different. The specification also did not specified the specific error message
+ * that _getIndexForId should throw.
+ */

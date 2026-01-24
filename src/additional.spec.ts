@@ -63,6 +63,6 @@ describe('getGrade', () => {
  */
 
 /**
- * The stryker mutation on line 125 is innocuous since the code is only changing the error 
- * message being shown when that test is run and the test still passes normally. 
+ * The stryker mutation on line 125 is innocuous since the code is only changing the error
+ * message being shown when that test is run and the test still passes normally.
  */

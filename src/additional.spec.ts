@@ -41,8 +41,28 @@ describe('nameToIDs', () => {
   });
 });
 
+describe('getGrade', () => {
+  it('should get the correct grade for a given course if the student is in multiple courses', () => {
+    const studentName1 = 'Joe';
+    const course1 = 'software engineering';
+    const course2 = 'software development';
+    const id1 = db.addStudent(studentName1);
+    db.addGrade(id1, course1, 98);
+    db.addGrade(id1, course2, 94);
+    const student1Grade = db.getGrade(id1, course1);
+    const student1Grade2 = db.getGrade(id1, course2);
+    expect(student1Grade).toStrictEqual({ course: 'software engineering', grade: 98 });
+    expect(student1Grade2).toStrictEqual({ course: 'software development', grade: 94 });
+  });
+});
+
 /**
  * The stryker mutation on line 70 is innocuous since it still correctly throw an error, the error
  * message is just different. The specification also did not specified the specific error message
  * that _getIndexForId should throw.
+ */
+
+/**
+ * The stryker mutation on line 125 is innocuous since the code is only changing the error 
+ * message being shown when that test is run and the test still passes normally. 
  */
